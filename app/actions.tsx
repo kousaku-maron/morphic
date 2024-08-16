@@ -10,8 +10,13 @@ import { CoreMessage, generateId, ToolResultPart } from 'ai'
 import { Spinner } from '@/components/ui/spinner'
 import { Section } from '@/components/section'
 import { FollowupPanel } from '@/components/followup-panel'
-import { inquire, researcher, taskManager, querySuggestor } from '@/lib/agents'
-import { writer } from '@/lib/agents/writer'
+import {
+  inquire,
+  researcher,
+  taskManager,
+  querySuggestor
+} from '@/lib/rsc-agents'
+import { writer } from '@/lib/rsc-agents/writer'
 import { saveChat } from '@/lib/actions/chat'
 import { Chat } from '@/lib/types'
 import { AIMessage } from '@/lib/types'
@@ -359,10 +364,10 @@ export const getUIStateFromAIState = (aiState: Chat) => {
   const chatId = aiState.chatId
   const isSharePage = aiState.isSharePage
 
-    // Ensure messages is an array of plain objects
-    const messages = Array.isArray(aiState.messages) 
-    ? aiState.messages.map(msg => ({...msg})) 
-    : [];
+  // Ensure messages is an array of plain objects
+  const messages = Array.isArray(aiState.messages)
+    ? aiState.messages.map(msg => ({ ...msg }))
+    : []
 
   return messages
     .map((message, index) => {
